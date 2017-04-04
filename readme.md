@@ -27,3 +27,4 @@ The `USB backup tool` is subject to the following conditions.
  - Development Language: C++
  - Development tools: Eclipse, Visual Studio
  - Developed by: 200924467 박형탁, 2009      조아록, 1 more
+ - Development period: April 4, 2017 - April 24, 2017
