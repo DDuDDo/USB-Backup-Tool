@@ -1,60 +1,136 @@
-#include <iostream>
-#include <cstdlib>
+ï»¿#ifdef _WIN32
+#define OS_Windows 1
+#include <windows.h>
+#include <cstring>
 #include <ctime>
+#include <cstdlib>
+#include <iostream>
+#include <sys/timeb.h>
+#include <tchar.h>
+#define WIDTH 7	// ì‚­ì œ ì˜ˆì •
+#elif __unix__
+#define OS_Windows 0
+#include <unistd.h>
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <sys/timeb.h>
+#endif
 
 using namespace std;
 
-void help_msg();			 // µµ¿ò¸» Ãâ·Â
-void usb_check();			 // ÇöÀç USB ¸¶¿îÆ® ¿©ºÎ È®ÀÎ
-string progress_bar(int); // Progress bar
-void sleep(int);			// delay sleep()
-
+void help_msg();			 // Help message output
+void usb_check();			 // Check whether USB is currently mounted
+static inline void progress_bar(int, int, int); // Progress bar output
+void sleep(int);			// delay sleep() -> cross platform sleep function
 
 int main(int argc, char* argv[]) {
+	/*
+	if (OS_Windows) {			// if OS is windows
 
-	if (argc == 1 || (sizeof(argv)/sizeof(argv[0])) < 3) {
+		cout << "OS is window ! - " << OS_Windows << endl;
+		system("DIR /w");
+
+	}
+	else if (!OS_Windows) { 	// if OS is unix
+
+		cout << "OS is linux ! - " << OS_Windows << endl;
+
+	}
+	*/
+	if (argc < 3) {
+
+		cout << endl << "[Error] The argument was not entered." << " [" << argc - 1 << " / 2]" << endl << endl;
 		help_msg();
+
+
+		// ìž…ë ¥í•œ ì¸ìž ì¶œë ¥
+		for (int i = 1; i < argc; i++) {
+			cout << "argv[" << i << "] = " << argv[i] << endl;
+		}
+
+		cout << argc;
+		exit(1);
 	}
-	if (argc == 1) {
-		fputs("¿¡·¯! ¿É¼ÇÀ» ÀÔ·ÂÇÏÁö ¾ÊÀ¸¼Ì±º¿ä...\n", stderr);
-		//exit(1);
-	}
 
-	// ¿É¼Ç °³¼ö Ãâ·Â
-	printf("%d °³ÀÇ ¿É¼ÇÀ» ÀÔ·ÂÇÏ¼Ì±º¿ä\n\n", argc - 1);
-
-
-	// ¿É¼Ç ¹è¿­ÀÇ ¿ä¼ÒµéÀ» ÇÏ³ª¾¿ Ãâ·Â
-	for (int i = 1; i < argc; i++)
-		printf("argv[%d] = %s\n", i, argv[i]);
-
-
-
+	cout << "[TODO LIST]" << endl <<
+		"1. argment ê²½ë¡œë¥¼ ìž…ë ¥ ë°›ê¸°" << endl <<
+		"2. cmd execute ëª…ë ¹ì–´ ì²˜ë¦¬ê¸° ë§Œë“¤ê¸°" << endl;
 
 	/*
-	cout << "Sleep() ÇÔ¼ö Å×½ºÆ® - 3ÃÊ ½ÃÀÛ!" << endl;
-	sleep(3000);
-	cout << "3ÃÊ ³¡" << endl;
-	*/
+	// Progress Bar í•¨ìˆ˜í…ŒìŠ¤íŠ¸ ë¼ì¸
+	int x, n, r, w;
+	w = 30;
+	n = 1000;
 
+	cout << "progress_bar() í•¨ìˆ˜ í…ŒìŠ¤íŠ¸ ì‹œìž‘!" << endl;
+	for (int i = 0; i<n; i++) {
+		progress_bar(i, n, w);
+		sleep(3);
+	}
+
+	// Sleep í•¨ìˆ˜í…ŒìŠ¤íŠ¸ ë¼ì¸
+	cout << "Sleep() í•¨ìˆ˜ í…ŒìŠ¤íŠ¸ - 3ì´ˆ ì‹œìž‘!" << endl;
+	sleep(3000);
+	cout << "3ì´ˆ ë" << endl;
+	*/
 	return 0;
 }
 
 void help_msg() {
+	using namespace std;
 	cout << "Help:" << endl;
-	cout << "   Win : > USBackup [Source_Path] [Destination_Path]" << endl;
-	cout << "   Linux : > ./USBackup [Source_Path] [Destination_Path]" << endl;
-	cout << "   example : > USBackup E:\ D:\Backup" << endl;
+	cout << " Win : > USBackup [Source_Path] [Destination_Path]" << endl;
+	cout << " Linux : > ./USBackup [Source_Path] [Destination_Path]" << endl;
+	cout << " example : > USBackup E:\\ D:\\Backup" << endl << endl;
 	//exit(1);
 }
 
 void usb_check() {
-	
+
 }
 
-string progress_bar(int value) {
+static inline void progress_bar(int x, int n, int w) {
+	// based on:
+	// http://www.ross.click/2011/02/creating-a-progress-bar-in-c-or-any-other-console-app/
+	static int cold = 0;
+	static float time_elapsed;
+	float time_to_end;
+	static struct timeb start;
+	struct timeb now;
+	int i;
 
-	return 0;
+	// get the clock at the starting
+	if (cold == 0) ftime(&start);
+
+	// Calculuate the ratio of complete-to-incomplete.
+	float ratio = x / (float)n;
+	int c = (int)(ratio * w);
+
+	// Only update if a new tick must be added
+	if (c == cold) return;
+	cold = c;
+
+	// get the clock now
+	ftime(&now);
+	// calculate the remaining time
+	time_elapsed = (now.time - start.time) + (now.millitm - start.millitm) / 1000.0;
+	time_to_end = time_elapsed * (1.0 / ratio - 1.0);
+
+	// Show the percentage complete.
+	cout << "[";
+
+	// Show the load bar.
+	for (i = 0; i < c; i++) cout << "=";
+	for (i = c; i < w; i++) cout << " ";
+
+	cout << "] " << (int)(ratio * 100) << "%  " << time_to_end << "sec\r" << flush;
+
+	if (c == w - 1) {
+		cout << "[       D   o   n   e   !       ] 100%  0.00000sec" << endl;
+	}
+
 }
 
 void sleep(int value) { // cross - platform sleep function
