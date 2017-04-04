@@ -8,7 +8,7 @@ Pusan National Univ.
 # 목록
 
  - [개요](#summary)
-  - The below will continue to be corrected and added later.
+ - The below will continue to be corrected and added later.
 
 ## summary
 
@@ -23,7 +23,7 @@ The `USB backup tool` is subject to the following conditions.
 [*Github Cheat Sheet Reference*](https://git.io/vSRDZ)
 
 
-Development Operating System: Windows & Linux
-Development Language: C++
-Development tools: Eclipse, Visual Studio
-Developed by: 200924467 박형탁, 2009      조아록, 1 more
+ - Development Operating System: Windows & Linux
+ - Development Language: C++
+ - Development tools: Eclipse, Visual Studio
+ - Developed by: 200924467 박형탁, 2009      조아록, 1 more
