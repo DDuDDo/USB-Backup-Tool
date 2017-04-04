@@ -39,21 +39,24 @@ int main(int argc, char* argv[]) {
 
 	}
 	*/
-	if (argc < 3) {
+	while (1) {
+		if (argc < 3) {
 
-		cout << endl << "[Error] The argument was not entered." << " [" << argc - 1 << " / 2]" << endl << endl;
-		help_msg();
-
-
-		// 입력한 인자 출력
-		for (int i = 1; i < argc; i++) {
-			cout << "argv[" << i << "] = " << argv[i] << endl;
+			cout << endl << "[Error] The argument was not entered." << " [" << argc - 1 << " / 2]" << endl << endl;
+			help_msg();
+			exit(1);
 		}
+		else {
 
-		cout << argc;
-		exit(1);
+			// 입력한 인자 출력
+			for (int i = 1; i < argc; i++) {
+				cout << "argv[" << i << "] = " << argv[i] << endl;
+			}
+			break;
+		}
 	}
 
+	cout << endl;
 	cout << "[TODO LIST]" << endl <<
 		"1. argment 경로를 입력 받기" << endl <<
 		"2. cmd execute 명령어 처리기 만들기" << endl;
