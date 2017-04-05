@@ -3,7 +3,7 @@
 Pusan National Univ. 
 2017 Prof. Ki-Joune Li of [file structure subject Term](http://stem.cs.pusan.ac.kr/FP/2017/FP2017Spring.html) Project Github repository.
 
-*단축주소: [`https://git.io/vSR1b`](hhttps://git.io/vSR1b)*
+*단축주소: [`https://git.io/vSR1b`](https://git.io/vSR1b)*
 
 # 목록
 
@@ -12,7 +12,7 @@ Pusan National Univ.
 
 ## summary
 
-### 프로그램 소개
+### Introduction
 
 The `USB backup tool` is subject to the following conditions.
 
@@ -28,3 +28,13 @@ The `USB backup tool` is subject to the following conditions.
  - Development tools: Eclipse, Visual Studio
  - Developed by: 200924467 박형탁, 2009      조아록, 1 more
  - Development period: April 4, 2017 - April 24, 2017
+
+### How-to-use
+
+![How-to-use](http://i.imgur.com/TuX09GB.png)
+
+
+```Help:
+     Win > USBackup [Source_Path] [Destination_Path]
+     Linux > ./USBackup [Source_Path] [Destination_Path]
+     Example > USBackup E:\\ D:\\Backup```
