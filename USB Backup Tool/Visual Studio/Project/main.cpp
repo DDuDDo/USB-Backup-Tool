@@ -7,7 +7,6 @@
 #include <iostream>
 #include <sys/timeb.h>
 #include <tchar.h>
-#define WIDTH 7	// 삭제 예정
 #elif __unix__
 #define OS_Windows 0
 #include <unistd.h>
