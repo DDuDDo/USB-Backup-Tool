@@ -39,6 +39,3 @@ The `USB backup tool` is subject to the following conditions.
      Win > USBackup [Source_Path] [Destination_Path]
      Linux > ./USBackup [Source_Path] [Destination_Path]
      Example > USBackup E:\\ D:\\Backup```
-
-
-     ++++TEST BRANCH +++++
