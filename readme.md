@@ -26,7 +26,7 @@ The `USB backup tool` is subject to the following conditions.
  - Development Operating System: Windows & Linux
  - Development Language: C++
  - Development tools: Eclipse, Visual Studio
- - Developed by: 박형탁, 조아록
+ - Developed by: 박형탁, 조아록, 장윤수
  - Development period: April 4, 2017 - April 24, 2017
 
 
