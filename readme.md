@@ -26,14 +26,15 @@ The `USB backup tool` is subject to the following conditions.
  - Development Operating System: Windows & Linux
  - Development Language: C++
  - Development tools: Eclipse, Visual Studio
- - Developed by: 200924467 박형탁, 2009      조아록, 1 more
+ - Developed by: 박형탁, 조아록
  - Development period: April 4, 2017 - April 24, 2017
+
 
 ### How-to-use
 
 ![How-to-use](http://i.imgur.com/TuX09GB.png)
 
-
+#### Help :
 ```Help:
      Win > USBackup [Source_Path] [Destination_Path]
      Linux > ./USBackup [Source_Path] [Destination_Path]
