@@ -1,5 +1,3 @@
-#ifdef _WIN32
-#define OS_Windows 1
 #include <windows.h>
 #include <cstring>
 #include <ctime>
@@ -7,15 +5,6 @@
 #include <iostream>
 #include <sys/timeb.h>
 #include <tchar.h>
-#elif defined(__unix__) || (defined(__APPLE__) && defined(__MACH__))
-#define OS_Windows 0
-#include <unistd.h>
-#include <iostream>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <sys/timeb.h>
-#endif
 
 using namespace std;
 
@@ -25,22 +14,11 @@ static inline void progress_bar(int, int, int); // Progress bar output
 void sleep(int);			// delay sleep() -> cross platform sleep function
 
 int main(int argc, char* argv[]) {
-	/*
-	if (OS_Windows) {			// if OS is windows
+	
+	system("DIR /w");
 
-		cout << "OS is window ! - " << OS_Windows << endl;
-		system("DIR /w");
-
-	}
-	else if (!OS_Windows) { 	// if OS is unix
-
-		cout << "OS is linux ! - " << OS_Windows << endl;
-
-	}
-	*/
 	while (1) {
 		if (argc < 3) {
-
 			cout << endl << "[Error] The argument was not entered." << " [" << argc - 1 << " / 2]" << endl << endl;
 			help_msg();
 			exit(1);
@@ -54,11 +32,6 @@ int main(int argc, char* argv[]) {
 			break;
 		}
 	}
-
-	cout << endl;
-	cout << "[TODO LIST]" << endl <<
-		"1. argment 경로를 입력 받기" << endl <<
-		"2. cmd execute 명령어 처리기 만들기" << endl;
 
 	/*
 	// Progress Bar 함수테스트 라인
@@ -77,6 +50,7 @@ int main(int argc, char* argv[]) {
 	sleep(3000);
 	cout << "3초 끝" << endl;
 	*/
+
 	return 0;
 }
 
@@ -84,7 +58,6 @@ void help_msg() {
 	using namespace std;
 	cout << "Help:" << endl;
 	cout << " Win : > USBackup [Source_Path] [Destination_Path]" << endl;
-	cout << " Linux : > ./USBackup [Source_Path] [Destination_Path]" << endl;
 	cout << " example : > USBackup E:\\ D:\\Backup" << endl << endl;
 	//exit(1);
 }
